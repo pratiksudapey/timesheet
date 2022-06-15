@@ -16,8 +16,14 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->string('pan_no');
+            $table->string('model_no');
+            $table->string('order_number');
+            $table->string('order_date')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
+            $table->boolean('status')->nullable();
             $table->timestamps('');
         });
     }

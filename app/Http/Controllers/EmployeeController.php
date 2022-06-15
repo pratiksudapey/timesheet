@@ -39,8 +39,6 @@ class EmployeeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'address' => ['required'],
-            'phone' => ['required'],
           ]);
           if ($validator->fails()) {
                   return redirect(route('employees.create'))
@@ -52,6 +50,9 @@ class EmployeeController extends Controller
         $employee->name = $request->name;
         $employee->address = $request->address;
         $employee->phone = $request->phone;
+        $employee->mobile_number = $request->mobile_number;
+        $employee->status = $request->status;
+
         $employee->save();
 
         return redirect()->back()->with('success', 'Employee created successfully');
@@ -91,8 +92,6 @@ class EmployeeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'address' => ['required'],
-            'phone' => ['required'],
           ]);
           if ($validator->fails()) {
                   return redirect(route('employees.edit'))
@@ -104,9 +103,11 @@ class EmployeeController extends Controller
         $employee->name = $request->name;
         $employee->address = $request->address;
         $employee->phone = $request->phone;
+        $employee->mobile_number = $request->mobile_number;
+        $employee->status = $request->status;
         $employee->save();
 
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully');
+        return redirect(route('employees.index'))->with('success', 'Employee updated successfully');
     }
 
     /**
@@ -119,7 +120,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $employee->delete();
-        return redirect()->route('employees.index')
+        return redirect(route('employees.index'))
             ->with('success', 'Employee deleted successfully');
     }
 }

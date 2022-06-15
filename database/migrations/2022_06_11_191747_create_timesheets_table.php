@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('timesheets', function (Blueprint $table) {
-            $table->date('date');
+            $table->id();
+            $table->date('date')->unique();
             $table->time('in_time');
             $table->time('out_time');
-            $table->integer('overtime');
+            $table->integer('overtime')->nullable();
             $table->foreignId('employee_id')->constrained();
             $table->foreignId('project_id')->constrained();
             $table->timestamps();

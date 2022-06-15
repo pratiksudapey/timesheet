@@ -15,6 +15,7 @@
                           <th>Name</th>
                           <th>Address</th>
                           <th>Phone</th>
+                          <th>Mobile</th>
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -24,6 +25,7 @@
                                 <td>{{$employee->name}}</td>
                                 <td>{{$employee->address}}</td>
                                 <td>{{$employee->phone}}</td>
+                                <td>{{$employee->mobile_number}}</td>
                                 <td>
                                     <a href="{{route('employees.edit', $employee->id)}}" class="btn btn-success">Edit</a>
                                     <form method="POST" action="{{route('employees.destroy', $employee->id)}}">
@@ -31,7 +33,7 @@
                                         @method('DELETE')
 
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-danger" value="Delete">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                                         </div>
                                     </form>
                                 </td>

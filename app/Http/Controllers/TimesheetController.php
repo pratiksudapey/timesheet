@@ -57,8 +57,8 @@ class TimesheetController extends Controller
         $timesheet->in_time = $request->in_time;
         $timesheet->out_time = $request->out_time;
         $timesheet->overtime = $request->overtime;
-        $timesheet->employee_id = $request->employee_id;
-        $timesheet->project_id = $request->project_id;
+        $timesheet->employee_id = $request->employee;
+        $timesheet->project_id = $request->project;
         $timesheet->save();
 
         return redirect()->back()->with('success', 'Timesheet created successfully');
@@ -112,8 +112,8 @@ class TimesheetController extends Controller
         $timesheet->in_time = $request->in_time;
         $timesheet->out_time = $request->out_time;
         $timesheet->overtime = $request->overtime;
-        $timesheet->employee_id = $request->employee_id;
-        $timesheet->project_id = $request->project_id;
+        $timesheet->employee_id = $request->employee;
+        $timesheet->project_id = $request->project;
         $timesheet->save();
 
         return redirect()->route('timesheets.index')->with('success', 'Timesheet updated successfully');

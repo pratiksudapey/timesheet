@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address');
-            $table->bigInteger('phone');
+            $table->string('address')->nullable();
+            $table->bigInteger('phone')->nullable();
+            $table->bigInteger('mobile_number')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

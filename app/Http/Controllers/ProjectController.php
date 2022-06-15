@@ -40,8 +40,9 @@ class ProjectController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'start_date' => ['required'],
-            'end_date' => ['required'],
+            'pan_no' => ['required'],
+            'model_no' => ['required'],
+            'order_number' => ['required'],
           ]);
           if ($validator->fails()) {
                   return redirect(route('projects.create'))
@@ -51,8 +52,14 @@ class ProjectController extends Controller
 
         $project = new Project();
         $project->name = $request->name;
+        $project->pan_no = $request->pan_no;
+        $project->model_no = $request->model_no;
+        $project->order_number = $request->order_number;
+        $project->order_date = $request->order_date;
+        $project->quantity = $request->quantity;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
+        $project->status = $request->status;
         $project->save();
 
         return redirect()->back()->with('success', 'Project created successfully');
@@ -92,8 +99,9 @@ class ProjectController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'start_date' => ['required'],
-            'end_date' => ['required'],
+            'pan_no' => ['required'],
+            'model_no' => ['required'],
+            'order_number' => ['required'],
           ]);
           if ($validator->fails()) {
                   return redirect(route('projects.edit'))
@@ -103,8 +111,14 @@ class ProjectController extends Controller
 
         $project = Project::find($id);
         $project->name = $request->name;
+        $project->pan_no = $request->pan_no;
+        $project->model_no = $request->model_no;
+        $project->order_number = $request->order_number;
+        $project->order_date = $request->order_date;
+        $project->quantity = $request->quantity;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
+        $project->status = $request->status;
         $project->save();
 
         return redirect()->route('projects.index')->with('success', 'Project updated successfully');

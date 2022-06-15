@@ -23,17 +23,17 @@
                             @foreach ($timesheets as $timesheet)
                             <tr>
                                 <td>{{date('d/m/Y', strtotime($timesheet->date))}}</td>
-                                <td>{{$timesheet->in_time->format('H:i:s')}}</td>
-                                <td>{{$timesheet->out_time->format('H:i:s')}}</td>
+                                <td>{{date('H:i:s', strtotime($timesheet->in_time))}}</td>
+                                <td>{{date('H:i:s', strtotime($timesheet->out_time))}}</td>
                                 <td>{{$timesheet->overtime}}</td>
                                 <td>
-                                    <a href="{{route('timesheets.edit', $timesheet->id)}}" class="btn btn-success">Edit</a>
-                                    <form method="POST" action="{{route('timesheets.destroy', $timesheet->id)}}">
+                                    <a href="{{route('timesheets.edit', $timesheet->id)}}" class="btn btn-success d-inline" >Edit</a>
+                                    <form method="POST" action="{{route('timesheets.destroy', $timesheet->id)}}" class="d-inline">
                                         @csrf
                                         @method('DELETE')
 
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-danger" value="Delete">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                                         </div>
                                     </form>
                                 </td>

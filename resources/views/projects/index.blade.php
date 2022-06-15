@@ -13,8 +13,13 @@
                         <thead>
                         <tr>
                           <th>Name</th>
+                          <th>Pan No</th>
+                          <th>Model No</th>
+                          <th>Order No</th>
+                          <th>Order Date</th>
                           <th>Start Date</th>
                           <th>End Date</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -22,8 +27,13 @@
                             @foreach ($projects as $project)
                             <tr>
                                 <td>{{$project->name}}</td>
+                                <td>{{$project->pan_no}}</td>
+                                <td>{{$project->model_no}}</td>
+                                <td>{{$project->order_number}}</td>
+                                <td>{{date('d/m/Y', strtotime($project->order_date))}}</td>
                                 <td>{{date('d/m/Y', strtotime($project->start_date))}}</td>
                                 <td>{{date('d/m/Y', strtotime($project->end_date))}}</td>
+                                <td>{{$project->status}}</td>
                                 <td>
                                     <a href="{{route('projects.edit', $project->id)}}" class="btn btn-success">Edit</a>
                                     <form method="POST" action="{{route('projects.destroy', $project->id)}}">
@@ -31,7 +41,7 @@
                                         @method('DELETE')
 
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-danger" value="Delete">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                                         </div>
                                     </form>
                                 </td>
