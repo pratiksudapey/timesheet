@@ -37,21 +37,16 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required'],
-          ]);
-          if ($validator->fails()) {
-                  return redirect(route('employees.create'))
-                    ->withErrors($validator)
-                    ->withInput();
-          }
+        $request->validate([
+            'name' => 'required'
+        ]);
 
         $employee = new Employee();
         $employee->name = $request->name;
         $employee->address = $request->address;
         $employee->phone = $request->phone;
         $employee->mobile_number = $request->mobile_number;
-        $employee->status = $request->status;
+        $employee->status = $request->status == 'on' ? 1 : 0;
 
         $employee->save();
 
@@ -90,21 +85,16 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required'],
-          ]);
-          if ($validator->fails()) {
-                  return redirect(route('employees.edit'))
-                    ->withErrors($validator)
-                    ->withInput();
-          }
+        $request->validate([
+            'name' => 'required'
+        ]);
 
         $employee = Employee::find($id);
         $employee->name = $request->name;
         $employee->address = $request->address;
         $employee->phone = $request->phone;
         $employee->mobile_number = $request->mobile_number;
-        $employee->status = $request->status;
+        $employee->status = $request->status == "on" ? 1 : 0;
         $employee->save();
 
         return redirect(route('employees.index'))->with('success', 'Employee updated successfully');

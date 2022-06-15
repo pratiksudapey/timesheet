@@ -29,7 +29,6 @@
 <div class="row m-3">
     <div class="form-group">
         <p><label>Status</label></p>
-        <input type="checkbox" name="status" data-on-color="success" data-on-text="Active" data-off-color="danger"
-            data-off-text="Inactive" @if (!empty($employee->status)) checked @endif data-bootstrap-switch>
+        <input type="checkbox" name="status" @if (!empty($employee->status)) checked @endif >
     </div>
 </div>

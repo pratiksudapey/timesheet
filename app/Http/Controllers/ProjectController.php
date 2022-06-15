@@ -38,17 +38,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => ['required'],
             'pan_no' => ['required'],
             'model_no' => ['required'],
             'order_number' => ['required'],
-          ]);
-          if ($validator->fails()) {
-                  return redirect(route('projects.create'))
-                    ->withErrors($validator)
-                    ->withInput();
-          }
+        ]);
 
         $project = new Project();
         $project->name = $request->name;
@@ -59,7 +54,7 @@ class ProjectController extends Controller
         $project->quantity = $request->quantity;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
-        $project->status = $request->status;
+        $project->status = $request->status == 'on' ? 1 : 0;
         $project->save();
 
         return redirect()->back()->with('success', 'Project created successfully');
@@ -97,17 +92,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => ['required'],
             'pan_no' => ['required'],
             'model_no' => ['required'],
             'order_number' => ['required'],
-          ]);
-          if ($validator->fails()) {
-                  return redirect(route('projects.edit'))
-                    ->withErrors($validator)
-                    ->withInput();
-          }
+        ]);
 
         $project = Project::find($id);
         $project->name = $request->name;
@@ -118,7 +108,7 @@ class ProjectController extends Controller
         $project->quantity = $request->quantity;
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
-        $project->status = $request->status;
+        $project->status = $request->status == 'on' ? 1 : 0;
         $project->save();
 
         return redirect()->route('projects.index')->with('success', 'Project updated successfully');

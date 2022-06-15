@@ -41,16 +41,11 @@ class TimesheetController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'date' => ['required'],
             'in_time' => ['required'],
             'out_time' => ['required'],
-          ]);
-          if ($validator->fails()) {
-                  return redirect(route('timesheets.create'))
-                    ->withErrors($validator)
-                    ->withInput();
-          }
+        ]);
 
         $timesheet = new Timesheet();
         $timesheet->date = $request->date;
@@ -96,16 +91,11 @@ class TimesheetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'date' => ['required'],
             'in_time' => ['required'],
             'out_time' => ['required'],
-          ]);
-          if ($validator->fails()) {
-                  return redirect(route('timesheets.edit'))
-                    ->withErrors($validator)
-                    ->withInput();
-          }
+        ]);
 
         $timesheet = Timesheet::find($id);
         $timesheet->date = $request->date;
